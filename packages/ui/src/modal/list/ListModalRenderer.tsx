@@ -85,6 +85,7 @@ type Props = {
   tokenId?: string
   collectionId?: string
   currencies?: Currency[]
+  normalizeRoyalties?: boolean
   children: (props: ChildrenProps) => ReactNode
 }
 
@@ -138,6 +139,7 @@ export const ListModalRenderer: FC<Props> = ({
   tokenId,
   collectionId,
   currencies,
+  normalizeRoyalties,
   children,
 }) => {
   const { data: signer } = useSigner()
@@ -179,6 +181,7 @@ export const ListModalRenderer: FC<Props> = ({
     open && {
       tokens: [`${contract}:${tokenId}`],
       includeAttributes: true,
+      normalizeRoyalties,
     },
     {
       revalidateFirstPage: true,
@@ -187,6 +190,7 @@ export const ListModalRenderer: FC<Props> = ({
   const { data: collections } = useCollections(
     open && {
       id: collectionId,
+      normalizeRoyalties,
     }
   )
 
